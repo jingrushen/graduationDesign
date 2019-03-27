@@ -1,0 +1,121 @@
+<style lang="less" scoped>
+  .all-list-container {
+    margin: 20rpx 40rpx;
+  }
+
+
+</style>
+<template>
+  <view class='all-list-container'
+  >
+    <block wx:if='{{isSearch}}'>
+      <SearchBar :keyword.sync="keyword"/>
+    </block>
+    <ShowList :list.sync="list"/>
+    <Loading :show.sync="showLoading"/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import ShowList from '@/components/showList'
+import Loading from '@/components/loading'
+import SearchBar from '@/components/searchBar'
+import Serv from '@/config/Api'
+
+export default class Alllist extends wepy.page{
+  config = {
+    navigationBarTitleText: ''
+  }
+  data = {
+    list: [],  // 列表数据
+    total: 0,  // 列表总数
+    fn: '',    // 页面的api方法
+    params: {
+      start: 0,
+      count: 20
+    }, // 指定参数
+    showLoading: true,  // 是否展示loading
+    isSearch: false, // 是否为搜索结果页面
+    keyword: 123
+  }
+  components = {
+    ShowList,
+    Loading,
+    SearchBar
+  }
+  async onReachBottom() {
+    let self = this;
+    if(this.params.start > this.total) {
+      this.showLoading = false;
+      return;
+    } else {
+      this.showLoading = true;
+      await this.getList(this.params);
+    }
+  }
+  methods = {
+
+  }
+
+  onPullDownRefresh() {
+    console.log('下拉刷新');
+  }
+
+
+  async getList(params) {
+
+    let resp = await this.fn(params);
+    let start = this.params.start
+    if(start === 0) {
+      this.total = resp.total
+    }
+    if(resp.subjects.length < 1) {
+      this.showLoading = false;      
+    } else {
+      this.list.push(...resp.subjects);
+      start += this.params.count;
+      this.params = {
+        ...this.params,
+        start
+      }
+    }
+    this.$apply()
+  }
+
+  /**
+   * options: {type: 热门推荐;  tag: 榜单; q: 搜索}
+   */
+  async onLoad(options) {
+    let self = this, fn;
+
+    if(options.type) {
+      wepy.setNavigationBarTitle({
+        title: options.type === 'new'? '最近上映' : '热门推荐'
+      })
+      fn = Serv.getTopMovie;
+    } else if(options.tag) {
+      wepy.setNavigationBarTitle({
+        title: options.tag
+      })
+      this.params = {
+        ...this.params,
+        tag: options.tag,
+      }
+      fn = Serv.searchMovie
+    } else if(options.q) {
+      wepy.setNavigationBarTitle({
+        title: '搜索'
+      })
+      this.params = {
+        ...this.params,
+        q: options.q
+      }
+      this.isSearch = true
+      fn = Serv.searchMovie
+    }
+    self.fn = fn
+    await this.getList(this.params, fn);
+    this.$apply();
+  }
+}
+</script>

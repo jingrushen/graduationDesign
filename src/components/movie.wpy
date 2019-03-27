@@ -1,0 +1,82 @@
+<style lang="less" scoped>
+  @import '../assets/css/base.less';
+  .movie-container {
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+  }
+  .movie-scroll {
+    display: flex;
+    flex-direction: row;
+    .movie-wrapper {
+      width: 30%;
+      flex: 0 0 30%;
+      border-radius: 10px;
+      margin-bottom: 30rpx;
+      margin-right: 30rpx;
+      .image-wrapper {
+        width: 100%;
+        height: 300rpx;
+        border-radius: 4px;
+      }
+      .text-wrapper {
+        display: flex;
+        justify-content: space-between;
+        text {
+          .fz_12;
+        }
+        .movie-scope {
+          flex: 0 0 30%;
+          color: @colorYellow;
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="movie-container">
+    <scroll-view
+      scroll-x="{{scrollX}}"
+      scroll-left="{{scrollTop}}"
+    >
+      <view class='movie-scroll'>
+        <view class="movie-wrapper" bindtap="handleClick" wx:for="{{listMovies}}" wx:key="{{index}}" data-id="{{item.id}}">
+          <image src="{{item.images.large}}" class="image-wrapper" mode='aspectFill'/>
+          <view class="text-wrapper">
+            <text class="movie-name text">{{item.title}}</text>
+            <text class="movie-scope text">{{item.rating.average}}分</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Moive extends wepy.component {
+  props = {
+    listMovies: {
+      type: Array,
+      default: []
+    } 
+  }
+  data = {
+    scrollX: "true",
+    scrollTop: 0
+  }
+  methods = {
+    handleClick(e) {
+      let id = e.currentTarget.dataset.id;
+      wepy.navigateTo({
+        url: `/pages/detail?id=${id}`
+      })
+    }
+  }
+  onLoad() {
+    console.log(this.listMovies, 'listmovie')
+  }
+}
+</script>

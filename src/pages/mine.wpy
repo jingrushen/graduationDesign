@@ -1,0 +1,88 @@
+<style lang="less" scoped>
+@import '../assets/css/base.less';
+  .mine-container {
+    .user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: @colorGreen;
+      padding: 40rpx 0;
+      .avatar {
+        border: 1px solid @borderBotm;
+        width: 200rpx;
+        height: 200rpx;
+        border-radius: 50%;
+        margin-bottom: 20rpx;
+      }
+      .button {
+      }
+    }
+    .list {
+      margin: 20rpx 40rpx;
+      .collect {
+        .fz_18;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10rpx;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="mine-container">
+    <view class="user" wx:if="{{isLogin}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}"/>
+      <text class="name">{{userInfo.nickName}}</text>
+    </view>
+    <view wx:else>
+      <button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo">微信授权登录</button>
+    </view>
+    <view class="list">
+      <text class="collect">收藏电影</text>
+      <ShowList :list.sync="list"/>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import ShowList from '@/components/showList'
+
+export default class Mine extends wepy.page{
+  config = {
+    navigationBarTitleText: '我的'
+  }
+  components = {
+    ShowList
+  }
+  data = {
+    isLogin: false,
+    list: [],
+    userInfo: ''
+  }
+  methods = {
+    getUserInfo(e) {
+      let userInfo = e.detail.userInfo;
+      this.isLogin = true;
+      this.userInfo = userInfo;
+      this.$apply()
+      wepy.setStorageSync('userInfo', userInfo)
+    }
+  }
+
+  onLoad() {
+    if(wepy.getStorageSync('userInfo')) {
+      this.userInfo = wepy.getStorageSync('userInfo');
+      this.list = wepy.getStorageSync('collect');
+    }
+    this.$apply();
+    this.isLogin = !!this.userInfo
+  }
+
+  onShow() {
+    this.list = wepy.getStorageSync('collect')
+    this.$apply();
+  }
+
+}
+</script>

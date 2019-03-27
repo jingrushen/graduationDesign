@@ -1,0 +1,66 @@
+{
+	"description": "A WePY project",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"appid": "wxb354e716b68b6be8",
+	"projectname": "film2",
+	"miniprogramRoot": "dist/",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "home",
+					"pathName": "pages/home",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "list",
+					"pathName": "pages/list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "allist",
+					"pathName": "pages/alllist",
+					"query": "type=hot"
+				},
+				{
+					"id": -1,
+					"name": "detail",
+					"pathName": "pages/detail",
+					"query": "id=30335059"
+				},
+				{
+					"id": -1,
+					"name": "mine",
+					"pathName": "pages/mine"
+				}
+			]
+		}
+	}
+}

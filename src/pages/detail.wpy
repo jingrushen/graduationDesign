@@ -1,0 +1,508 @@
+<style lang="less" scoped>
+@import '../assets/css/base.less';
+  .detail-container {
+    margin: 20rpx 40rpx;
+    .title {
+      .fz_16;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10rpx;
+    }
+    .elips {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+    .spread {
+      float: right;
+      .fz_14;
+      color: @color999;
+    }
+    .movie-info-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20rpx;
+      .avater {
+        width: 200rpx;
+        height: 300rpx;
+        flex: 0 0 200rpx;
+        margin-right: 20rpx;
+        image {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+        }
+      }
+      .desc {
+        line-height: 1.2;
+        .name {
+          .fz_20;
+          font-weight: bold;
+        }
+        .detail {
+          display: inline-block;
+          .fz_12;
+          color: @color666;
+          margin-top: 20rpx;
+          margin-bottom: 50rpx;
+        }
+        .scope {
+          float: left;
+          text {
+            color: @colorYellow;
+            font-weight: bold;
+            .fz_18;
+          }
+          image {
+            width: 40rpx;
+            height: 40rpx;
+          }
+        }
+        .collect {
+          width: 30%;
+          float: right;
+          view {
+            border: 2px solid @borderBotm;
+            border-radius: 2px;
+            padding: 10rpx 20rpx;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: @color666;
+            .fz_14;
+            image {
+              vertical-align: middle;
+              width: 40rpx;;
+              height: 40rpx;
+            }
+          }
+        }
+      }
+    }
+    .summary-wrapper {
+      line-height: 1.3;
+      overflow: hidden;
+      margin-bottom: 20rpx;
+      .detail {
+        .fz_14;
+        color: @color666;
+        display: -webkit-box;
+      }
+    }
+    .person-wrapper {
+      margin-bottom: 20rpx;
+      .person-scroll {
+        display: flex;
+        flex-direction: row;
+        .person-scroll-wrapper {
+          width: 30%;
+          flex: 0 0 30%;
+          height: 350rpx;
+          margin-right: 30rpx;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .person-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+          }
+          text {
+            .fz_14;
+            color: @color666;
+          }
+        }
+      }
+    }
+    .vedio-wrapper {
+      margin-bottom: 20rpx;
+      .vedio-scroll {
+        display: flex;
+        .vedio-scroll-wrapper {
+          
+        }
+      }
+    }
+    .pic-wrapper {
+      margin-bottom: 20rpx;
+      .pic-scroll {
+        display: flex;
+        .pic-scroll-wrapper {
+          .pic-image {
+          }
+        }
+      }
+    }
+    .comment-wrapper {
+      margin-bottom: 60rpx;
+      .comment-container {
+        border-bottom: 1rpx solid @borderBotm;
+        padding: 20rpx;
+        .author {
+          display: flex;
+          justify-content: space-between;
+          .avater {
+            display: block;
+            border: 1px solid @borderBotm;
+            border-radius: 30rpx;
+            width: 60rpx;
+            height: 60rpx;
+            margin-right: 20rpx;
+            vertical-align: middle;
+          }
+          .info {
+            flex: 1;
+            .name {
+              display: block;
+              .fz_16;
+              font-weight: bold;
+            }
+            .scope {
+              color: @colorYellow;
+              .fz_14;
+              image {
+                width: 20rpx;
+                height: 20rpx;
+              }
+              .date {
+                color: @color666;
+                .fz_14;
+                margin-left: 20rpx;
+              }
+            }
+          }
+        }
+        .content {
+          .fz_14;
+          color: @color666;
+          margin-bottom: 10rpx;
+        }
+        .like {
+          color: @color666;
+          .fz_14;
+          image {
+            vertical-align: middle;
+            width: 30rpx;
+            height: 30rpx;
+            margin-right: 10rpx;
+          }
+        }
+      }
+    }
+    .reviews-wrapper {
+      margin-bottom: 20rpx;
+      .reviews-container {
+        border-radius: 4px;
+        border-bottom: 1rpx solid @borderBotm;
+        background: #eee;
+        padding: 20rpx;
+        overflow: hidden;
+        margin-bottom: 20rpx;
+        .author {
+          display: flex;
+          justify-content: space-between;
+          .avater {
+            display: block;
+            border: 1px solid @borderBotm;
+            border-radius: 30rpx;
+            width: 60rpx;
+            height: 60rpx;
+            margin-right: 20rpx;
+            vertical-align: middle;
+          }
+          .info {
+            flex: 1;
+            .name {
+              display: block;
+              .fz_16;
+              font-weight: bold;
+            }
+            .scope {
+              color: @colorYellow;
+              .fz_14;
+              image {
+                width: 20rpx;
+                height: 20rpx;
+              }
+              .date {
+                color: @color666;
+                .fz_14;
+                margin-left: 20rpx;
+              }
+            }
+          }
+        }
+        .title {
+          margin-top: 20rpx;
+          font-weight: bold;
+          .fz_16;
+        }
+        .content {
+          display: -webkit-box;
+          .fz_14;
+          color: @color666;
+          margin-bottom: 10rpx;
+        }
+        .like {
+          color: @color666;
+          .fz_14;
+          image {
+            vertical-align: middle;
+            width: 30rpx;
+            height: 30rpx;
+            margin-right: 10rpx;
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class='detail-container' wx:if="{{show}}">
+    <view class='movie-info-wrapper'>
+      <view class='avater'><image src="{{movieInfo.info.avater}}"/></view>
+      <view class="desc">
+        <text class="name">{{movieInfo.info.name}}</text>
+        <text class="detail">{{movieInfo.info.detail}}</text>
+        <view class="scope">
+          <block wx:for="{{movieInfo.info.scope.fullStar}}">
+            <image src="../assets/icons/full-star.png"/>
+          </block>
+          <block wx:for="{{movieInfo.info.scope.halfStar}}">
+            <image src="../assets/icons/half-star.png"/>
+          </block>
+          <block wx:for="{{movieInfo.info.scope.noStar}}">
+            <image src="../assets/icons/no-star.png"/>
+          </block>
+        </view>
+        <view class="collect" bindtap="clickCollect">
+          <view wx:if="{{isCollect}}">
+            <image src="../assets/icons/star_high.png"/>已收藏
+          </view>
+          <view wx:else>
+            <image src="../assets/icons/star.png"/>收藏
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="summary-wrapper">
+      <text class="title">简介</text>
+      <text class="detail {{isSpread1? '' : 'elips'}} ">{{movieInfo.desc}}</text>
+      <text class="spread" bindtap='clickSpread1'>{{isSpread1? '收起' : '展开'}}</text>
+    </view>
+    <view class="person-wrapper">
+      <text class="title">演员列表</text>
+      <scroll-view
+        scroll-x="{{scrollX}}"
+        scroll-left="{{scrollTop}}"
+      >
+        <view class="person-scroll">
+          <view class="person-scroll-wrapper" wx:for='{{movieInfo.person}}' wx:key="{{index}}">
+            <image src="{{item.avatars.large}}" class="person-image"/>
+            <text>{{item.name}}</text>
+            <text>{{item.type}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="vedio-wrapper">
+      <text class="title">预告片/花絮</text>
+      <scroll-view
+        scroll-x="{{scrollX}}"
+        scroll-left="{{scrollTop}}"
+      >
+        <view class="vedio-scroll">
+          <view class="vedio-scroll-wrapper" wx:for='{{movieInfo.vedio}}' wx:key="{{index}}">
+            <video
+              src="{{item}}"
+              controls
+            >
+            </video>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="pic-wrapper">
+      <text class="title">剧照</text>
+      <scroll-view
+        scroll-x="{{scrollX}}"
+        scroll-left="{{scrollTop}}"
+      >
+        <view class="pic-scroll">
+          <view class="pic-scroll-wrapper" wx:for="{{movieInfo.pic}}" wx:key="{{index}}">
+            <image class="pic-image" src="{{item.image}}" mode='aspectFit'/>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="comment-wrapper">
+      <text class="title">短评</text>
+      <view class="comment-container" wx:for="{{movieInfo.comments}}" wx:key="{{index}}">
+        <view class="author">
+          <image class="avater" src="{{item.author.avatar}}" mode=""/>
+          <view class="info">
+            <text class="name">{{item.author.name}}</text>
+            <view class="scope">
+              <block wx:for="{{item.scope.fullStar}}">
+                <image src="../assets/icons/full-star.png"/>
+              </block>
+              <block wx:for="{{item.scope.noStar}}">
+                <image src="../assets/icons/no-star.png"/>
+              </block>
+              <text class="date">{{item.created_at}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="content">{{item.content}}</view>
+        <view class="like"><image src="../assets/icons/like.png"/>{{item.useful_count}}</view>
+      </view>
+    </view>
+    <view class="reviews-wrapper">
+      <text class="title">影评</text>
+      <view class="reviews-container" wx:for="{{movieInfo.reviews}}" wx:key="{{index}}">
+        <view class="author">
+          <image src="{{item.author.avatar}}" class="avater"/>
+          <view class="info">
+            <text class="name">{{item.author.name}}</text>
+            <view class="scope">
+              <block wx:for="{{item.scope.fullStar}}">
+                <image src="../assets/icons/full-star.png"/>
+              </block>
+              <block wx:for="{{item.scope.noStar}}">
+                <image src="../assets/icons/no-star.png"/>
+              </block>
+              <text class="date">{{item.created_at}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="title">{{item.title}}</view>
+        <text class="content {{item.isSpread2? '' : 'elips'}}" bindtap='clickSpread2'  data-index="{{index}}">{{item.content}}</text>
+        <text class="spread" bindtap='clickSpread2'  data-index="{{index}}">{{item.isSpread2? '收起' : '展开'}}</text>
+        <view class="like"><image src='../assets/icons/like.png' />{{item.useful_count}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Serv from '@/config/Api'
+import Util from '@/util'
+
+export default class Detail extends wepy.page {
+  data = {
+    isCollect: false,
+    isSpread1: false,
+    show: false,
+    movieInfo: {
+      person: [],  // 演员列表
+      vedio: [],   // 预告片
+      pic: [],   // 剧照
+      info: {   //电影相关信息
+        avater: '',  // 海报
+        name: '',  // 电影名称
+        detail: '',  // 电影详细介绍
+        scope: ''  // 评分
+      },
+      reviews: []  // 影评
+    },
+    movie: {
+      title: '',
+      id: '',
+      images: '',
+      rating: ''
+    },
+    scrollX: "true",
+    scrollTop: 0,
+  }
+  config = {
+    navigationBarTitleText: '详情'
+  }
+  methods = {
+    clickCollect() {
+      if(!wepy.getStorageSync('userInfo')) {
+        wepy.showToast({
+          title: '未授权，请到我的进行授权'
+        })
+        return ;
+      }
+      let title = this.isCollect? '取消收藏' : ' 收藏成功'
+      wepy.showToast({
+        title,
+        icon: 'none'
+      })
+      this.isCollect = !this.isCollect;
+      let collectMovies = wepy.getStorageSync('collect') || [];
+      if(this.isCollect) {
+        collectMovies.push(this.movie);
+      } else {
+        collectMovies = collectMovies.filter(item => item.id !== this.movie.id)
+      }
+      let movies = Util.uniqueArray(collectMovies)
+      wepy.setStorageSync('collect', movies);
+    },
+    clickSpread1() {
+      this.isSpread1 = !this.isSpread1
+    },
+    clickSpread2(e) {
+      let index = e.currentTarget.dataset.index;
+      this.movieInfo['reviews'][index].isSpread2 = !this.movieInfo['reviews'][index].isSpread2
+    }
+  }
+  async getDetail(params) {
+    let resp = await Serv.getDetail(params);
+    let { reviews } = await Serv.getReviews(params);
+    let desc = '', person = [], vedio = [], pic = [], info = {}, comments = [];
+    desc = resp.summary;
+    person.push(...resp.directors.map((item) => {item.type = '导演'; return item;}))
+    person.push(...resp.casts.map((item) => {item.type = '演员'; return item;}))
+    vedio.push(...resp.trailer_urls, ...resp.blooper_urls);
+    pic.push(...resp.photos);
+    comments = resp.popular_comments.map((item) => {
+      item.created_at = item.created_at.split(' ')[0];
+      item.scope = Util.getStar2(item.rating.value);
+      return item;
+    })
+    reviews = reviews.map((item) => { 
+      item.isSpread2 = false; 
+      item.created_at = item.created_at.split(' ')[0];
+      item.scope = Util.getStar2(item.rating.value);
+      return item;
+    })
+    this.movie = {
+      id: resp.id,
+      rating: resp.rating,
+      images: resp.images,
+      title: resp.title,
+    }
+    this.movieInfo = {
+      desc,
+      person,
+      vedio,
+      pic,
+      info: {
+        avater: resp.images.large,
+        scope: Util.getStar1(resp.rating.average),
+        name: `${resp.title}（${resp.year}）`,
+        detail: `${resp.genres.join(' / ')} / ${resp.countries} / ${resp.mainland_pubdate}上映 /片长${resp.durations}`,
+      },
+      comments,
+      reviews
+    }
+    this.$apply();
+  }
+  async onLoad(options) {
+    wepy.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    await this.getDetail({id: options.id});
+    this.show = true;
+    let collect = wepy.getStorageSync('collect') || [];
+    this.isCollect = Util.hasValue(collect, options.id);
+    this.$apply();
+    wepy.hideLoading();
+  }
+}
+</script>

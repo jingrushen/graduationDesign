@@ -1,0 +1,132 @@
+<style lang="less" scoped>
+@import '../assets/css/base.less';
+  .list-view {
+    margin: 20rpx 40rpx;
+  }
+  .list-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20rpx;
+  }
+  .list-left {
+    width: 30%;
+    height: 200rpx;
+    background-size: cover;
+    position: relative;
+    border-radius: 4px;
+    &::after {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.6);
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      content: '';
+      z-index: 1;
+      border-radius: 4px;
+    }
+    text {
+      display: inline-block;
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-weight: bold;
+      .fz_16;
+    }
+  }
+  .list-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .fz_12;
+    padding-left: 40rpx;
+    border-radius: 0 4px 4px 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: @borderBotm;
+    height: 150rpx;
+    text {
+      color: @color333;
+      line-height: 18px;
+    }
+    .scope {
+      margin-left: 20rpx;
+      color: @colorYellow;
+    }
+  }
+</style>
+<template>
+  <view class='list-view'>
+    <view class="list-wrapper" wx:for="{{listMovies}}" wx:for-item='itemTag' wx:for-index="tagIndex" wx:key='tagIndex' bindtap="clickList" data-index="{{tagIndex}}" wx:if="{{show}}">
+      <view class="list-left" style="background-image: url('{{itemTag[0].images.large}}')"><text>{{listName[tagIndex].name}}</text></view>
+      <view class="list-right">
+        <text wx:for="{{listMovies[tagIndex]}}" wx:for-item='item' wx:for-index='index' wx:key="index">{{index + 1}}: {{item.title}}<text class="scope">{{item.rating.average}}分</text></text>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Serv from '@/config/Api'
+
+export default class List extends wepy.page {
+  config = {
+    navigationBarTitleText: '榜单'
+  }
+
+  data = {
+    listName: [
+      {
+        name: '喜剧片',
+        tag: '喜剧'
+      }, {
+        name: '动作片',
+        tag: '动作'
+      }, {
+        name: '科幻片',
+        tag: '科幻'
+      }, {
+        name: '爱情片',
+        tag: '爱情'
+      },
+    ],
+    listMovies: [],
+    show: false
+  }
+  methods = {
+    clickList(e) {
+      let tag = this.listName[e.currentTarget.dataset.index].tag;
+      this.$navigate({
+        url: `/pages/alllist?tag=${tag}`,
+      })
+    }
+  }
+
+  async searchMovie(params) {
+    let resp = await Serv.searchMovie(params);
+    this.listMovies.push(resp.subjects.slice(0, 3));
+    this.$apply();
+  }
+
+  async onLoad() {
+    wepy.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    for(let item in this.listName) {
+      await this.searchMovie({tag: this.listName[item].tag})
+    }
+    this.show = true;
+    wepy.hideLoading();
+    this.$apply();
+
+  }
+
+}
+</script>

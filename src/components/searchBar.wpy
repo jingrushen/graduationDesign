@@ -1,0 +1,48 @@
+<style lang='less'>
+  .searchBar {
+    display: flex;
+  }
+  .searchInput {
+    border: 1px solid #eee;
+    border-radius: 2px;
+    padding: 4rpx 8rpx;
+    width: 80%;
+    font-size: 12px;
+  }
+  .searchButton {
+    margin-left: 4px;
+    font-size: 12px;
+    &::after {
+      border:none;
+    }
+  }
+</style>
+<template>
+  <view class="searchBar">
+    <input placeholder="请输入电影名字" bindinput='handleInput' class="searchInput" value="{{keyword}}"/>
+    <button bindtap='handleSearch' class="searchButton">搜索</button>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class SearchBar extends wepy.component {
+  props = {
+    keyword: {
+      type: String,
+      default: ''
+    }
+  }
+  methods = {
+    handleInput(e) {
+      this.$emit('handleChange', e.detail.value);
+    },
+    handleSearch() {
+      this.$emit('handleSearch');
+    }
+  }
+  onLoad() {
+    console.log(this.keyword, 'kerword')
+  }
+}
+</script>

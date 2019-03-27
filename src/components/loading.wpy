@@ -1,0 +1,47 @@
+<style lang="less" scoped>
+@import '../assets/css/base.less';
+  @keyframes circle {
+    0% {
+      transform: rotate(0deg)
+    }
+    100% {
+      transform: rotate(-360deg)
+    }
+  }
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loading-wrapper {
+      .loading-circle {
+        animation: circle 2s ease-in-out infinite;
+        width: 60rpx;
+        height: 60rpx;
+        vertical-align: middle;
+        margin-right: 20rpx;
+      }
+    }
+    text {
+      color: @color999;
+      .fz_12;
+    }
+  }
+</style>
+<template>
+  <view class="loading-container">
+    <view class="loading-wrapper" wx:if="{{show}}">
+      <image class="loading-circle" src="../assets/icons/loading.png" mode="aspectFit"/>
+      <text>正在加载...</text>
+    </view>
+    <text wx:else class="loading-none">没有更多了~~</text>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class Loading extends wepy.component {
+  props = {
+    show: Boolean
+  }
+}
+</script>

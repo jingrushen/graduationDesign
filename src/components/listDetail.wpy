@@ -1,0 +1,59 @@
+<style lang="less" scoped>
+  .list-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 40rpx;
+    border: 1px solid #aaa;
+  }
+  .list-left {
+    width: 30%;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+  }
+  .list-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    text {
+      margin-bottom: 10rpx;
+    }
+  }
+</style>
+<template>
+  <view class="list-wrapper">
+    <view class="list-left" style="background: {{backgrounds[0]}}">喜剧片</view>
+    <view class="list-right">
+      <text>1.三傻大闹宝莱坞</text>
+      <text>2.人间喜剧</text>
+      <text>3.人之囧途</text>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class ListDetail extends wepy.component {
+  data = {
+    listName: [
+      {
+        name: '喜剧片',
+        tag: '喜剧'
+      }, {
+        name: '动作片',
+        tag: '动作'
+      }, {
+        name: '科幻片',
+        tag: '科幻'
+      }, {
+        name: '爱情片',
+        tag: '爱情'
+      },
+    ]
+  }
+}
+</script>

@@ -1,0 +1,109 @@
+<style lang="less" scoped>
+  @import '../assets/css/base.less';
+  .home-view {
+    margin: 20rpx 40rpx;
+  }
+  .panel {
+    margin-bottom: 20rpx;
+  }
+  .list-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10rpx;
+    text {
+      color: @color666;
+      .fz_12
+    }
+  }
+  .new-list {
+    
+  }
+</style>
+<template>
+  <view class="home-view" wx:if="{{show}}">
+    <SearchBar class="panel"/>
+    <Swiper :swiperMovies.sync="swiperMovies" class="panel"/>
+    <view>
+      <view class="list-wrapper new-list">
+        <text>最近上映</text>
+      </view>
+      <Movie1 :listMovies.sync="listMovies1"/>
+    </view>
+    <view>
+      <view class="list-wrapper hot-list">
+        <text>热门推荐</text>
+        <text bindtap="clickMore(hot)">更多</text>
+      </view>
+      <Movie2 :listMovies.sync="listMovies2"/>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import SearchBar from '@/components/searchBar'
+import Swiper from '@/components/swiper'
+import Movie from '@/components/movie'
+import Serv from '@/config/Api'
+
+export default class Home extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页'
+  }
+  components = {
+    SearchBar,
+    Swiper,
+    Movie1: Movie,
+    Movie2: Movie,
+  }
+  data = {
+    searchValue: '', // 搜索数据
+    swiperMovies: [], // 轮播数据  
+    listMovies1: [], // 最新海报数据
+    listMovies2: [],  // 热映海报数据
+    show: false,
+  }
+  events = {
+    'handleChange': (value, $events) => {
+      this.searchValue = value;
+    },
+    'handleSearch': () => {
+      this.$navigate({
+        url: `/pages/alllist?q=${this.searchValue}`
+      })
+    },
+    'clickNewId': (id, $events) => {
+      this.$navigate({
+        url: `/pages/detail?id=${id}`
+      })
+    }
+  }
+  methods = {
+    clickMore(type) {
+      this.$navigate({
+        url: `/pages/alllist?type=${type}`
+      })
+    }
+  }
+
+  async getList(params) {
+    let resp1 = await Serv.getNewList(params);
+    let resp2 = await Serv.getTopMovie(params);
+    this.swiperMovies = resp1.subjects.slice(0, 3);
+    this.listMovies1 = resp1.subjects.slice(3);
+    this.listMovies2 = resp2.subjects;
+    this.$apply();
+  }
+
+  async onLoad() {
+    wepy.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    await this.getList();
+    this.show = true;
+    this.$apply();
+    wepy.hideLoading()
+  }
+}
+</script>
+

@@ -1,0 +1,35 @@
+1.去除button自带的border, background样式：
+.button {
+  background: none
+}
+.button::after {
+  border: none;
+}
+2.block组件
+3.swiper组件 触发 点击事件
+bindtap
+4.props传值
+静态传值：传递常量数据，type只能为String
+动态传值：
+.sync        当父组件的属性值发生变化，对应的子组件属性值也会发生变化
+twoWay: true 子组件的属性值发生变化，会同时改变父组件对应的值
+5.生命周期
+- onLoad(query) 页面加载时触发，只会调用一次，参数query为路径中的参数
+- onShow() 页面切入前台时触发
+- onReady() 页面初次渲染完成时触发，一个页面只会调用一次
+- onHide() 页面切入后台时触发
+- onUnload() 页面卸载时触发
+6.跳转页面
+page页面：this.$navigate
+component页面：this.$parent.$navigate / wepy.navigateTo()
+
+踩坑：
+1.在父组件中循环渲染子组件传进去的props值为undefined，解决方法：在子组件中实现循环，传入的props值为列表数据
+2.1.4.1版本之后不支持async/await, 需要自己配置 https://github.com/Tencent/wepy/wiki/wepy%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8async-await
+3.嵌套循环渲染
+4.flexbox布局 最后一列最两排并列出现
+5.上拉下拉回弹效果
+6.对输入框做了校验
+7.渲染html内容
+8.获取用户信息 出错 getUserInfo:fail scope unauthorized
+9.授权登陆
