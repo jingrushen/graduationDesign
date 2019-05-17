@@ -35,14 +35,13 @@ export default class SearchBar extends wepy.component {
   }
   methods = {
     handleInput(e) {
-      this.$emit('handleChange', e.detail.value);
+      this.keyword = e.detail.value;
     },
     handleSearch() {
-      this.$emit('handleSearch');
+      this.$emit('handleSearch', this.keyword);
     }
   }
   onLoad() {
-    console.log(this.keyword, 'kerword')
   }
 }
 </script>

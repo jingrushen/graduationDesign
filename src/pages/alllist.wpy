@@ -36,7 +36,8 @@ export default class Alllist extends wepy.page{
     }, // 指定参数
     showLoading: true,  // 是否展示loading
     isSearch: false, // 是否为搜索结果页面
-    keyword: 123
+    keyword: 123,
+    flag: false   // 是否是榜单传入
   }
   components = {
     ShowList,
@@ -57,22 +58,25 @@ export default class Alllist extends wepy.page{
 
   }
 
-  onPullDownRefresh() {
-    console.log('下拉刷新');
+  async onPullDownRefresh() {
+    await this.getList({start: 0, count: 20});
+    this.$apply();
   }
-
 
   async getList(params) {
 
     let resp = await this.fn(params);
-    let start = this.params.start
+    let start = this.params.start;
+    let data = this.flag? resp.data.list : resp.subjects
+
     if(start === 0) {
       this.total = resp.total
     }
-    if(resp.subjects.length < 1) {
-      this.showLoading = false;      
+
+    if(data && data.length < 1) {
+      this.showLoading = false;
     } else {
-      this.list.push(...resp.subjects);
+      this.list.push(...data);
       start += this.params.count;
       this.params = {
         ...this.params,
@@ -101,7 +105,8 @@ export default class Alllist extends wepy.page{
         ...this.params,
         tag: options.tag,
       }
-      fn = Serv.searchMovie
+      fn = Serv.searchMovie;
+      this.flag = true
     } else if(options.q) {
       wepy.setNavigationBarTitle({
         title: '搜索'
@@ -111,10 +116,11 @@ export default class Alllist extends wepy.page{
         q: options.q
       }
       this.isSearch = true
+      this.flag = true
       fn = Serv.searchMovie
     }
     self.fn = fn
-    await this.getList(this.params, fn);
+    await this.getList(this.params, fn, this.flag);
     this.$apply();
   }
 }

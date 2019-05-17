@@ -35,10 +35,10 @@
 <template>
   <view class='show-list-container'>
     <view class="movie-wrapper" bindtap="handleClick" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}">
-      <image src="{{item.images.large}}" class="image-wrapper" mode='aspectFill'/>
+      <image src="{{item.images.large || item.cover || item.img}}" class="image-wrapper" mode='aspectFill'/>
       <view class="text-wrapper">
         <text class="movie-name">{{item.title}}</text>
-        <text class="movie-scope">{{item.rating.average}}分</text>
+        <text class="movie-scope">{{item.rating.average || item.rate}}分</text>
       </view>
     </view>
   </view>

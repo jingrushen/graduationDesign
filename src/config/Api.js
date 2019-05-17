@@ -1,11 +1,13 @@
 import Request from './Request'
 
+let host = 'https://easy-mock.com/mock/5cdbd482b62ba32b7a27f19b/example';
+
 let apiName = {
-  getNewList: 'v2/movie/in_theaters',  // 获取首页最新电影列表
-  getMovieDetail: 'v2/movie/subject',   // 获取电影详情
-  searchMovie: 'v2/movie/search', // 根据q或tag搜索电影
-  getTopMovie: 'v2/movie/top250', // 获取电影top250
-  getDetail: 'v2/movie/subject',  // 获取电影详情
+  getNewList: '/v2/movie/in_theaters',  // 获取首页最新电影列表
+  getMovieDetail: '/v2/movie/subject',   // 获取电影详情
+  searchMovie: host + '/v2/movie/search', // 根据q或tag搜索电影
+  getTopMovie: '/v2/movie/top250', // 获取电影top250
+  getDetail: '/v2/movie/subject',  // 获取电影详情
 }
 
 export default class {

@@ -64,9 +64,9 @@
 <template>
   <view class='list-view'>
     <view class="list-wrapper" wx:for="{{listMovies}}" wx:for-item='itemTag' wx:for-index="tagIndex" wx:key='tagIndex' bindtap="clickList" data-index="{{tagIndex}}" wx:if="{{show}}">
-      <view class="list-left" style="background-image: url('{{itemTag[0].images.large}}')"><text>{{listName[tagIndex].name}}</text></view>
+      <view class="list-left" style="background-image: url('{{itemTag[0].cover}}')"><text>{{listName[tagIndex].name}}</text></view>
       <view class="list-right">
-        <text wx:for="{{listMovies[tagIndex]}}" wx:for-item='item' wx:for-index='index' wx:key="index">{{index + 1}}: {{item.title}}<text class="scope">{{item.rating.average}}分</text></text>
+        <text wx:for="{{listMovies[tagIndex]}}" wx:for-item='item' wx:for-index='index' wx:key="index">{{index + 1}}: {{item.title}}<text class="scope">{{item.rate}}分</text></text>
       </view>
     </view>
   </view>
@@ -110,7 +110,7 @@ export default class List extends wepy.page {
 
   async searchMovie(params) {
     let resp = await Serv.searchMovie(params);
-    this.listMovies.push(resp.subjects.slice(0, 3));
+    this.listMovies.push(resp.data.list.slice(0, 3));
     this.$apply();
   }
 

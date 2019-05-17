@@ -56,19 +56,15 @@ export default class Home extends wepy.page {
     Movie2: Movie,
   }
   data = {
-    searchValue: '', // 搜索数据
     swiperMovies: [], // 轮播数据  
     listMovies1: [], // 最新海报数据
     listMovies2: [],  // 热映海报数据
     show: false,
   }
   events = {
-    'handleChange': (value, $events) => {
-      this.searchValue = value;
-    },
-    'handleSearch': () => {
+    'handleSearch': (keyword) => {
       this.$navigate({
-        url: `/pages/alllist?q=${this.searchValue}`
+        url: `/pages/alllist?q=${keyword}`
       })
     },
     'clickNewId': (id, $events) => {

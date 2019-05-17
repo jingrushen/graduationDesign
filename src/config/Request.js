@@ -9,11 +9,13 @@ import config from '@/config/Config'
 function request (options) {
   // 提取配置请求
   const { url, method, header, data } = options
+  let URL;
 
+  URL = url.indexOf('http') > -1 ? url : config.host + url
   
   // 基本请求的配置
   let reqObj = {
-    url: config.host + url,
+    url: URL,
     method: method.toUpperCase(),
     header: {
       "Content-Type": "text"

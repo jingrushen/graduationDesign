@@ -12,6 +12,8 @@
 	"appid": "wxb354e716b68b6be8",
 	"projectname": "film2",
 	"miniprogramRoot": "dist/",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
