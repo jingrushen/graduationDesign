@@ -423,7 +423,7 @@ export default class Detail extends wepy.page {
     clickCollect() {
       if(!wepy.getStorageSync('userInfo')) {
         wepy.showToast({
-          title: '未授权，请到我的进行授权'
+          title: '未授权'
         })
         return ;
       }
