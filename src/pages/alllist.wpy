@@ -54,8 +54,13 @@ export default class Alllist extends wepy.page{
       await this.getList(this.params);
     }
   }
-  methods = {
-
+  
+  events = {
+    'handleSearch': (keyword) => {
+      this.$navigate({
+        url: `/pages/alllist?q=${keyword}`
+      })
+    },
   }
 
   async onPullDownRefresh() {
@@ -70,7 +75,7 @@ export default class Alllist extends wepy.page{
     let data = this.flag? resp.data.list : resp.subjects
 
     if(start === 0) {
-      this.total = resp.total
+      this.total = resp.total || 6
     }
 
     if(data && data.length < 1) {
@@ -82,6 +87,7 @@ export default class Alllist extends wepy.page{
         ...this.params,
         start
       }
+      this.showLoading = false;
     }
     this.$apply()
   }

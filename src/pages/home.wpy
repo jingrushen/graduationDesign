@@ -3,9 +3,6 @@
   .home-view {
     margin: 20rpx 40rpx;
   }
-  .panel {
-    margin-bottom: 20rpx;
-  }
   .list-wrapper {
     display: flex;
     justify-content: space-between;
@@ -21,7 +18,7 @@
 </style>
 <template>
   <view class="home-view" wx:if="{{show}}">
-    <SearchBar class="panel"/>
+    <SearchBar />
     <Swiper :swiperMovies.sync="swiperMovies" class="panel"/>
     <view>
       <view class="list-wrapper new-list">

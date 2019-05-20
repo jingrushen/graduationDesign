@@ -1,6 +1,7 @@
 <style lang='less'>
   .searchBar {
     display: flex;
+    margin-bottom: 20rpx;
   }
   .searchInput {
     border: 1px solid #eee;
