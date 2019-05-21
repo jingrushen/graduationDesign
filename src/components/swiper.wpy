@@ -2,6 +2,7 @@
   .swiper {
     width: 95%;
     height: 600rpx;
+    margin-bottom: 20rpx;
   }
   .slide-image {
     width: 100%;
@@ -32,14 +33,32 @@ export default class Swiper extends wepy.component {
     swiperMovies: {
       type: Array,
       default: []
-    }
-  }
-  data = {
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 500,
-    circular: true
+    },
+
+    indicatorDots: {
+      type: Boolean,
+      default: true
+    },
+
+    autoplay: {
+      type: Boolean,
+      default: true
+    },
+
+    interval: {
+      type: Number,
+      default: 3000
+    },
+
+    duration: {
+      type: Number,
+      default: 500
+    },
+
+    circular: {
+      type: Boolean,
+      default: true
+    },
   }
   methods = {
     handleClickImage(e) {
