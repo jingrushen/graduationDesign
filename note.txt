@@ -33,3 +33,5 @@ component页面：this.$parent.$navigate / wepy.navigateTo()
 7.渲染html内容
 8.获取用户信息 出错 getUserInfo:fail scope unauthorized
 9.授权登陆
+
+难点：
