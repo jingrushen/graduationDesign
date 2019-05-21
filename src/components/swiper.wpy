@@ -58,7 +58,7 @@ export default class Swiper extends wepy.component {
     circular: {
       type: Boolean,
       default: true
-    },
+    }
   }
   methods = {
     handleClickImage(e) {

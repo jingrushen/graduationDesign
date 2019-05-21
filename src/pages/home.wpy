@@ -19,7 +19,7 @@
 <template>
   <view class="home-view" wx:if="{{show}}">
     <SearchBar />
-    <Swiper :swiperMovies.sync="swiperMovies" class="panel"/>
+    <Swiper :swiperMovies.sync="swiperMovies" class="panel" :total="5"/>
     <view>
       <view class="list-wrapper new-list">
         <text>最近上映</text>
@@ -81,7 +81,7 @@ export default class Home extends wepy.page {
   async getList(params) {
     let resp1 = await Serv.getNewList(params);
     let resp2 = await Serv.getTopMovie(params);
-    this.swiperMovies = resp1.subjects.slice(0, 3);
+    this.swiperMovies = resp1.subjects.slice(0, 3)
     this.listMovies1 = resp1.subjects.slice(3);
     this.listMovies2 = resp2.subjects;
     this.$apply();
