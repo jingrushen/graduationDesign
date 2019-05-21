@@ -60,6 +60,9 @@ export default class Home extends wepy.page {
   }
   events = {
     'handleSearch': (keyword) => {
+      if(keyword.replace(/(^\s*)|(\s*$)/g, "").length <= 0) {
+        return ;
+      }
       this.$navigate({
         url: `/pages/alllist?q=${keyword}`
       })

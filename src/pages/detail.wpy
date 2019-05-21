@@ -423,7 +423,8 @@ export default class Detail extends wepy.page {
     clickCollect() {
       if(!wepy.getStorageSync('userInfo')) {
         wepy.showToast({
-          title: '未授权'
+          title: '未授权',
+          icon: 'none'
         })
         return ;
       }
